@@ -27,6 +27,6 @@ done
 
 echo "Export complete"
 
-./dropbox_uploader.sh upload $DB_BACKUP $DB_BACKUP_DROP
+~/dropbox-database-backup/dropbox_uploader.sh upload $DB_BACKUP $DB_BACKUP_DROP
 
 echo "Upload complete"
