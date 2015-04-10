@@ -2,10 +2,10 @@
 HN=`hostname | awk -F. '{print $1}'`
  
 # Set variables
-DB_BACKUP="~/Dropbox/mysql/$HN-`date +%d-%m-%Y_%H-%M`"
+DB_BACKUP="backups/$HN-`date +%d-%m-%Y_%H-%M`"
 DB_USER="root"
 DB_PASSWD="root"
- 
+
 # Create the backup directory
 mkdir -p $DB_BACKUP
  
@@ -23,4 +23,8 @@ echo "Exporting $db"
 fi;
  
 done
+
+./dropbox_uploader.sh upload $DB_BACKUP $DB_BACKUP
+
+
 echo "Export complete"
