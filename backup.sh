@@ -17,7 +17,8 @@ do
 # Check to make sure performance_schema is missed out
 if [ $db != "performance_schema" ]
 then
- 
+
+
 # Then export
 echo "Exporting $db"
 mysqldump --user=$DB_USER --password=$DB_PASSWD --opt $db | gzip > "$DB_BACKUP/mysqldump-$HN-$db-$(date +%Y-%m-%d).gz";
@@ -26,6 +27,11 @@ fi;
 done
 
 echo "Export complete"
+
+#Delete old local backups that are older than 7 days
+find backups* -mtime +7 -exec rm {} \;
+echo "Deleted older than 7 days"
+
 
 ~/dropbox-database-backup/dropbox_uploader.sh upload $DB_BACKUP $DB_BACKUP_DROP
 
